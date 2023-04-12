@@ -34,8 +34,11 @@ let videos = readDB()
 
 
 app.get('/api/videos', (req, res) => {
-  console.log('get');
-  res.send(videos.videosList)
+  console.log('get')
+  let criteria = req.query.filterCriteria === undefined || req.query.filterCriteria === "" ? ".*" : req.query.filterCriteria
+  res.send(videos.videosList.filter((video) => 
+    video.name.match(criteria) != null || video.genre.match(criteria) != null)
+  )
 })
 
 app.post('/api/videos', (req, res) => {

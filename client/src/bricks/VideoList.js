@@ -6,16 +6,20 @@ import UploadVideo from "./UploadVideo";
 
 
 // calling server to get DB_video.json
-function getVideoList(callBack) {
-  fetch("/api/videos")
+function getVideoList(filterCriteria, page, pageSize, callBack) {
+  fetch("/api/videos?" + new URLSearchParams({filterCriteria, page, pageSize}).toString(), {
+    method: "GET"
+  })
     .then((res) => res.json())
     .then((data) => callBack(data))
 }
 
-function VideoList() {
+function VideoList({searchCriteria}) {
   const [videoList, setVideoList] = useState([])
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(10)
   const [refreshCount, setRefreshCount] = useState(0)
-  useEffect(() => getVideoList(setVideoList), [refreshCount])
+  useEffect(() => getVideoList(searchCriteria, page, pageSize, setVideoList), [searchCriteria, refreshCount, page, pageSize])
 
    
     return (
@@ -25,7 +29,8 @@ function VideoList() {
         </Row>
 
         <Row xs={3} md={6} className="g-4">
-          {videoList.map((video) => 
+          {videoList
+            .map((video) => 
             <Video 
               key={video.id} 
               genre={video.genre} 
