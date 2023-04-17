@@ -21,12 +21,15 @@ function Video({genre, name, link, id, callBackDelete}) {
 
   return (
     <Col>
-      <Card>
-      <Card.Img variant="top" src="holder.js/100px160" />
+      <Card style={{ width: '12rem'}}>
+      <Card.Img variant="top" src="holder.js/100px160" style={{height: '50%', objectFit: 'cover'}}/>
       <Card.Body>
               <Card.Title>
                 <Icon path={mdiAccountSchoolOutline} size={1.3} color="darkBlue"/>{" "}
-                {name} {genre}
+                {name}
+                <br></br>
+                <Icon path={mdiAccountSchoolOutline} size={1.3} color="darkBlue"/>{" "}
+                {genre}
               </Card.Title>
               <Card.Text>
                 <Icon path={mdiIdentifier} size={1.3} color="gray"/>{" "}

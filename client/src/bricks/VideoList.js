@@ -23,12 +23,14 @@ function VideoList({searchCriteria}) {
 
    
     return (
-      <>
+      <div>
+      <div>
         <Row>
           <UploadVideo callBackUpload={() =>  setRefreshCount(refreshCount+1) }/>
         </Row>
-
-        <Row xs={3} md={6} className="g-4">
+        </div>
+        <div >
+        <Row xs={3} md={4} lg={5} className="g-4 flex-wrap justify-content-center ps-4 pe-3">
           {videoList
             .map((video) => 
             <Video 
@@ -40,7 +42,8 @@ function VideoList({searchCriteria}) {
               callBackDelete={() => setRefreshCount(refreshCount+1)}
             />)}
         </Row>
-      </>
+      </div>
+      </div>
     );
 
  

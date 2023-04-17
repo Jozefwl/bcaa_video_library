@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+
+export const genres = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Programming', 'Romance', 'Thriller', 'Tech', 'Coocking',];
+
 
 function newVideo(name, genre, link, language, successF, errorF) {
   fetch("/api/videos", {
@@ -17,11 +19,20 @@ function UploadVideo({callBackUpload}) {
   const [hidden, setVisible] = useState(true)
 
   const [name, setName] = useState("")
-  const [genre, setGenre] = useState("")
   const [link, setLink] = useState("")
   const [language, setLanguage] = useState("")
+
+  const [selectedGenres, setSelectedGenres] = useState([]);
+
+  const handleGenreSelect = (e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+    setSelectedGenres(selectedOptions);
+  };
+
   return (
-    <div>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col md={6}>
       <Button variant="outline-success" onClick={() => setVisible(!hidden)}>{hidden ? "Upload" : "Cancel"}</Button>
       <Form hidden={hidden}>
         <Form.Group className="mb-3" controlId="formBasicName">
@@ -34,13 +45,17 @@ function UploadVideo({callBackUpload}) {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicGenre">
-          <Form.Label>Genre</Form.Label>
-          <Form.Control 
-          type="text" 
-          placeholder="Genre" 
-          value={genre}
-          onChange={(e) =>setGenre(e.target.value)}/>
-        </Form.Group>
+        <Form.Label>Genre</Form.Label>
+        <Form.Select
+          multiple
+          value={selectedGenres}
+          onChange={handleGenreSelect}
+        >
+          {genres.map((genre, index) => (
+            <option key={index} value={genre}>{genre}</option>
+          ))}
+        </Form.Select>
+      </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicLink">
           <Form.Label>Link</Form.Label>
@@ -63,16 +78,16 @@ function UploadVideo({callBackUpload}) {
         <Button variant="primary" type="button" 
           disabled={
             name === "" ||
-            genre === "" ||
+            selectedGenres.length === 0 ||
             link === "" ||
             language === "" 
             }
             onClick={() => {
-              newVideo(name, genre, link, language,
+              newVideo(name, selectedGenres, link, language,
                 // succesF
                 () =>  {
                   setName("")
-                  setGenre("")
+                  handleGenreSelect("")
                   setLink("")
                   setLanguage("")
                   callBackUpload()
@@ -87,8 +102,9 @@ function UploadVideo({callBackUpload}) {
         </Button>
       </Form>
 
-
-    </div>
+      </Col>
+      </Row>
+    </Container>
   )
 }
 
