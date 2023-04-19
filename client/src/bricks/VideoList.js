@@ -6,8 +6,8 @@ import UploadVideo from "./UploadVideo";
 
 
 // calling server to get DB_video.json
-function getVideoList(filterCriteria, page, pageSize, callBack) {
-  fetch("/api/videos?" + new URLSearchParams({filterCriteria, page, pageSize}).toString(), {
+function getVideoList(filterCriteria , callBack) {
+  fetch("/api/videos?" + new URLSearchParams({filterCriteria }).toString(), {
     method: "GET"
   })
     .then((res) => res.json())
@@ -16,10 +16,8 @@ function getVideoList(filterCriteria, page, pageSize, callBack) {
 
 function VideoList({searchCriteria}) {
   const [videoList, setVideoList] = useState([])
-  const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(10)
   const [refreshCount, setRefreshCount] = useState(0)
-  useEffect(() => getVideoList(searchCriteria, page, pageSize, setVideoList), [searchCriteria, refreshCount, page, pageSize])
+  useEffect(() => getVideoList(searchCriteria , setVideoList), [searchCriteria, refreshCount ])
 
    
     return (

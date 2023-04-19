@@ -8,8 +8,6 @@ const port = 3001
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// TODO pouit read a precitat zoznam z DB_videos.json
-
 const defaultDb = {
   "videosList" : []
 }
@@ -34,7 +32,8 @@ let videos = readDB()
 
 
 app.get('/api/videos', (req, res) => {
-  console.log('get')
+ 
+  console.log('get', req.query.filterCriteria)
   let criteria = req.query.filterCriteria === undefined || req.query.filterCriteria === "" ? ".*" : req.query.filterCriteria
   res.send(videos.videosList.filter((video) => 
     video.name.match(criteria) != null || video.genre.match(criteria) != null)

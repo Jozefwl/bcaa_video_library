@@ -22,12 +22,9 @@ function UploadVideo({callBackUpload}) {
   const [link, setLink] = useState("")
   const [language, setLanguage] = useState("")
 
-  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState("");
 
-  const handleGenreSelect = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-    setSelectedGenres(selectedOptions);
-  };
+  
 
   return (
     <Container>
@@ -47,9 +44,8 @@ function UploadVideo({callBackUpload}) {
         <Form.Group className="mb-3" controlId="formBasicGenre">
         <Form.Label>Genre</Form.Label>
         <Form.Select
-          multiple
           value={selectedGenres}
-          onChange={handleGenreSelect}
+          onChange={(e) => setSelectedGenres(e.target.value)}
         >
           {genres.map((genre, index) => (
             <option key={index} value={genre}>{genre}</option>
@@ -78,7 +74,7 @@ function UploadVideo({callBackUpload}) {
         <Button variant="primary" type="button" 
           disabled={
             name === "" ||
-            selectedGenres.length === 0 ||
+            selectedGenres === "" ||
             link === "" ||
             language === "" 
             }
@@ -87,7 +83,7 @@ function UploadVideo({callBackUpload}) {
                 // succesF
                 () =>  {
                   setName("")
-                  handleGenreSelect("")
+                  setSelectedGenres("")
                   setLink("")
                   setLanguage("")
                   callBackUpload()
