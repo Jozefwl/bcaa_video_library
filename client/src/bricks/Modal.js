@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const OkCancelModal = ({messageTitle, message, show, onOk, onCancle}) => {
+const OkCancelModal = ({messageTitle, message, show, onOk, onCancel}) => {
 
     return (
         <Modal show={show}>
@@ -11,7 +11,7 @@ const OkCancelModal = ({messageTitle, message, show, onOk, onCancle}) => {
             </Modal.Header>
             <Modal.Body>{message}</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onCancle}>
+                <Button variant="secondary" onClick={onCancel}>
                     Close
                 </Button>
                 <Button variant="primary" onClick={onOk}>

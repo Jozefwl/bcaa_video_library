@@ -51,7 +51,7 @@ function Video({genre, name, link, id, callBackDelete}) {
           () => {callBackDelete()},
           // errorF
           (res) => console.error(res))}
-        onCancle={() => setShow(false)} />
+        onCancel={() => setShow(false)} />
     </Col>
 
 
