@@ -34,7 +34,7 @@ function Video({genre, name, link, id, callBackDelete}) {
               </Card.Title>
               <Card.Text>
                 <Icon path={mdiIdentifier} size={1.3} color="gray"/>{" "}
-                <a href={link}>Link to video</a>
+                <a href={link} target="_blank" rel="noreferrer">Link to video</a>
               </Card.Text>
               <Card.Text 
                 className="text-end" 
