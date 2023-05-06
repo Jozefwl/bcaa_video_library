@@ -18,11 +18,12 @@ function removeVideo(id, successF, errorF) {
 
 function Video({genre, name, link, id, callBackDelete}) {
   const [show, setShow] = useState(false)
+  let imagelink="http://img.youtube.com/vi/"+(link).substr(32)+"/0.jpg";
 
   return (
     <Col>
       <Card style={{ width: '12rem'}}>
-      <Card.Img variant="top" src="holder.js/100px160" style={{height: '50%', objectFit: 'cover'}}/>
+      <Card.Img variant="top" src={imagelink} style={{height: '50%', objectFit: 'cover'}}/>
       <Card.Body>
               <Card.Title>
                 <Icon path={mdiAccountSchoolOutline} size={1.3} color="darkBlue"/>{" "}
@@ -33,7 +34,7 @@ function Video({genre, name, link, id, callBackDelete}) {
               </Card.Title>
               <Card.Text>
                 <Icon path={mdiIdentifier} size={1.3} color="gray"/>{" "}
-                {link}
+                <a href={link}>Link to video</a>
               </Card.Text>
               <Card.Text 
                 className="text-end" 
