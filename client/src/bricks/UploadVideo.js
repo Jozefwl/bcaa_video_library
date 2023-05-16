@@ -18,6 +18,7 @@ export const genres = [
   "Other",
 ];
 
+
 function newVideo(name, genre, link, language, successF, errorF) {
   fetch("/api/videos", {
     method: "POST",
@@ -104,7 +105,7 @@ function UploadVideo({ callBackUpload }) {
                   selectedGenres,
                   link,
                   language,
-                  // succesF
+                  // succesF, when sending to server is success, client is calling the function which is calling all the setters
                   () => {
                     setName("");
                     setSelectedGenres("");

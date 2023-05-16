@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card"; // import of Card component
 import Icon from '@mdi/react' // component we will use to display the icon
-import { mdiAccountSchoolOutline, mdiIdentifier, mdiTrashCanOutline } from '@mdi/js' // icons we want to use
+import { mdiBookOpenPageVariant, mdiVideoVintage,  mdiYoutube, mdiTrashCanOutline } from '@mdi/js' // icons we want to use
 import Col from 'react-bootstrap/Col';
 import OkCancelModal from "./Modal";
 
@@ -26,20 +26,20 @@ function Video({genre, name, link, id, callBackDelete}) {
       <Card.Img variant="top" src={imagelink} style={{height: '50%', objectFit: 'cover'}}/>
       <Card.Body>
               <Card.Title>
-                <Icon path={mdiAccountSchoolOutline} size={1.3} color="darkBlue"/>{" "}
+                <Icon path={mdiVideoVintage} size={1.2} color="#7AE6FC"/>{" "}
                 {name}
                 <br></br>
-                <Icon path={mdiAccountSchoolOutline} size={1.3} color="darkBlue"/>{" "}
+                <Icon path={mdiBookOpenPageVariant} size={1.2} color="#7AE6FC"/>{" "}
                 {genre}
               </Card.Title>
               <Card.Text>
-                <Icon path={mdiIdentifier} size={1.3} color="gray"/>{" "}
+                <Icon path={mdiYoutube} size={1.2} color="red"/>{" "}
                 <a href={link} target="_blank" rel="noreferrer">Link to video</a>
               </Card.Text>
               <Card.Text 
                 className="text-end" 
                 onClick={() => setShow(true)}>
-                <Icon path={mdiTrashCanOutline} size={1.3} color="red"/>{" "}
+                <Icon path={mdiTrashCanOutline} size={1.1} color="red"/>{" "}
               </Card.Text>
             </Card.Body>
       </Card>

@@ -28,9 +28,10 @@ function saveDB(ObjectDB) {
   fs.writeFileSync(path, JSON.stringify(ObjectDB, null, 2))
 }
 
+// here videos from DB_videos.json are loaded
 let videos = readDB()
 
-
+// req is in this case a fetch from getVideoList, our res is filtered video objects
 app.get('/api/videos', (req, res) => {
  
   console.log('get', req.query.filterCriteria)
@@ -40,25 +41,28 @@ app.get('/api/videos', (req, res) => {
   )
 })
 
+// In this case, req is an object with all the properties set in UploadVideo.js and function which is calling all the setters 
+// see newVideo() in UploadVideo.js
 app.post('/api/videos', (req, res) => {
   console.log('post');
+  // into VideosList I am pushing body of the req object and id
   videos.videosList.push({...req.body, id: uuidv4.v4()})
+  // and by this function I am rewritting the DB_video.json 
   saveDB(videos)
+  // and the rewrited .json server is sending back to client
   res.send(videos.videosList)
 })
 
+// removeVideo() from Video.js is called
 app.delete('/api/videos', (req, res) => {
   console.log('delete');
+  // server get id in body from req and comparing it with all other IDs of videoList´s videos
   const newVideoList = videos.videosList.filter((video) => video.id !== req.body.id)
+  // server rewrites videoList only with the videos whoch we want to keep
   videos.videosList = newVideoList
   saveDB(videos)
   res.send(videos.videosList)
 })
-
-
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
