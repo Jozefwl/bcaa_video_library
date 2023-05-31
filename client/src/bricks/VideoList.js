@@ -38,6 +38,7 @@ function VideoList({searchCriteria}) {
               genre={video.genre} 
               link={video.link} 
               name={video.name} 
+              language={video.language}
               id={video.id}
               callBackDelete={() => setRefreshCount(refreshCount+1)}
             />)}

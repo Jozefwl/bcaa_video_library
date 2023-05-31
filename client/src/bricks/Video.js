@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card"; // import of Card component
 import Icon from '@mdi/react' // component we will use to display the icon
-import { mdiBookOpenPageVariant, mdiVideoVintage,  mdiYoutube, mdiTrashCanOutline } from '@mdi/js' // icons we want to use
+import { mdiBookOpenPageVariant, mdiVideoVintage,  mdiYoutube, mdiTrashCanOutline, mdiTranslate } from '@mdi/js' // icons we want to use
 import Col from 'react-bootstrap/Col';
 import OkCancelModal from "./Modal";
 
@@ -16,21 +16,24 @@ function removeVideo(id, successF, errorF) {
   }).then(res => res.ok ? successF() : errorF(res))
 }
 
-function Video({genre, name, link, id, callBackDelete}) {
+function Video({genre, name, language, link, id, callBackDelete}) {
   const [show, setShow] = useState(false)
   let imagelink="http://img.youtube.com/vi/"+(link).substr(32)+"/0.jpg";
 
   return (
-    <Col>
-      <Card style={{ width: '12rem'}}>
+    <Col className="p-3">
+      <Card >
       <Card.Img variant="top" src={imagelink} style={{height: '50%', objectFit: 'cover'}}/>
-      <Card.Body>
+      <Card.Body style={{textAlign: "center"}}>
               <Card.Title>
                 <Icon path={mdiVideoVintage} size={1.2} color="#7AE6FC"/>{" "}
                 {name}
-                <br></br>
+                <br />
                 <Icon path={mdiBookOpenPageVariant} size={1.2} color="#7AE6FC"/>{" "}
                 {genre}
+                <br />
+                <Icon path={mdiTranslate} size={1} color="#7AE6FC"/>{" "}
+                {language}
               </Card.Title>
               <Card.Text>
                 <Icon path={mdiYoutube} size={1.2} color="red"/>{" "}

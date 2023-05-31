@@ -12,7 +12,7 @@ export default function NavbarMenu({onSearch}) {
 
   // search on enter
   function handleSubmit(e) {
-    // when I click enter, no page will be reloaded
+    // preventDefault() means, when I click enter, no page will be reloaded
     e.preventDefault()
     onSearch(inputValue)
     console.log(e);
