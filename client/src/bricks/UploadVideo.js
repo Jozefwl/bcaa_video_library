@@ -18,7 +18,6 @@ export const genres = [
   "Other",
 ];
 
-
 function newVideo(name, genre, link, language, successF, errorF) {
   fetch("/api/videos", {
     method: "POST",
@@ -112,6 +111,7 @@ function UploadVideo({ callBackUpload }) {
                     setLink("");
                     setLanguage("");
                     callBackUpload();
+                    window.location.reload(true);
                   },
                   // errorF
                   (res) => {
