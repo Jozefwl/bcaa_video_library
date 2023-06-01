@@ -19,8 +19,24 @@ export default function NavbarMenu({ onSearch }) {
     console.log(e);
   }
 
+  // user selection
+  const [selectedUser, setSelectedUser] = useState(0);
+
   function userSelector(userSel) {
-    return "Guest User";
+    setSelectedUser(userSel);
+  }
+
+  function getUserName() {
+    switch (selectedUser) {
+      case 1:
+        return "Jozef Waldhauser";
+      case 2:
+        return "Xénia Richnáková";
+      case 3:
+        return "Dominika Jandorová";
+      default:
+        return "Guest User";
+    }
   }
 
   return (
@@ -30,21 +46,23 @@ export default function NavbarMenu({ onSearch }) {
           <Icon path={mdiLibrary} size={2} color="#27B9D0" />
         </Navbar.Brand>
 
-        <NavDropdown title={userSelector()} id="basic-nav-dropdown">
-          <NavDropdown.Item onclick={userSelector(1)}>
-            Jozef Waldhauser
-          </NavDropdown.Item>
-          <NavDropdown.Item onclick={userSelector(2)}>
-            Xénia Richnáková
-          </NavDropdown.Item>
-          <NavDropdown.Item onclick={userSelector(3)}>
-            Dominika Jandorová
-          </NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item onclick={userSelector(4)}>
-            Guest User
-          </NavDropdown.Item>
-        </NavDropdown>
+        <Form>
+          <NavDropdown title={getUserName()} id="basic-nav-dropdown">
+            <NavDropdown.Item onClick={() => userSelector(1)}>
+              Jozef Waldhauser
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => userSelector(2)}>
+              Xénia Richnáková
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => userSelector(3)}>
+              Dominika Jandorová
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={() => userSelector(0)}>
+              Guest User
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Form>
 
         <Navbar.Collapse id="navbarScroll">
           <Nav
