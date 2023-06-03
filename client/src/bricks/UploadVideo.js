@@ -35,7 +35,7 @@ function UploadVideo({ callBackUpload }) {
   const [link, setLink] = useState("");
   const [language, setLanguage] = useState("");
 
-  const [selectedGenres, setSelectedGenres] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState(genres[0]);
 
   return (
     <Container>
